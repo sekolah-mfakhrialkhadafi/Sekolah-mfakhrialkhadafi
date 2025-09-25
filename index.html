@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SMK Negeri 7 Batam - M. Fakhri Al Khadafi</title>
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: Arial, sans-serif;
+      scroll-behavior: smooth;
+    }
+    body { line-height: 1.6; }
+    
+    /* HEADER */
+    header {
+      display: flex; justify-content: space-between; align-items: center;
+      background: white; padding: 10px 20px;
+      position: fixed; width: 100%; top: 0; z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .logo { display: flex; align-items: center; }
+    .logo img { height: 50px; margin-right: 10px; }
+    nav ul { display: flex; list-style: none; }
+    nav ul li { margin: 0 15px; }
+    nav ul li a {
+      text-decoration: none; color: black; font-weight: bold;
+      transition: 0.3s;
+    }
+    nav ul li a:hover { color: orange; }
+    
+    /* Menu mobile */
+    .menu-toggle { display: none; flex-direction: column; cursor: pointer; }
+    .menu-toggle span {
+      height: 3px; width: 25px; background: black;
+      margin: 4px 0; transition: 0.3s;
+    }
+    @media(max-width: 768px) {
+      nav ul {
+        position: absolute; top: 70px; right: 0;
+        background: white; flex-direction: column;
+        width: 200px; display: none;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      }
+      nav ul.active { display: flex; }
+      .menu-toggle { display: flex; }
+    }
+    
+    /* HERO */
+    .hero {
+      height: 100vh;
+      background: url("https://picsum.photos/1200/800") no-repeat center/cover;
+      position: relative; display: flex; justify-content: center; align-items: center;
+      text-align: left; color: white;
+      padding: 0 20px;
+    }
+    .hero::before {
+      content: ""; position: absolute; top:0; left:0;
+      width:100%; height:100%; background: rgba(0,0,0,0.5);
+    }
+    .hero-content {
+      position: relative; z-index: 1;
+      display: flex; align-items: center; gap: 20px;
+      max-width: 800px;
+      animation: fadeInUp 2s ease-in-out;
+    }
+    .hero-content .line {
+      width: 4px;
+      height: 150px;
+      background: orange;
+      border-radius: 2px;
+      position: relative;
+    }
+    .hero-content .line::before,
+    .hero-content .line::after {
+      content: "";
+      width: 10px; height: 10px;
+      background: orange;
+      border-radius: 50%;
+      position: absolute; left: -3px;
+    }
+    .hero-content .line::before { top: 0; }
+    .hero-content .line::after { bottom: 0; }
+    .hero-content .text h2 { color: white; font-size: 20px; }
+    .hero-content .text h1 { color: orange; font-size: 32px; margin: 10px 0; }
+    .hero-content .text p { color: white; font-size: 16px; line-height: 1.6; }
+
+    @keyframes fadeInUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* STATISTIK */
+    .statistik {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 60px 20px;
+      background: orange;
+      color: white;
+      text-align: center;
+    }
+    .stat-box h1 {
+      font-size: 48px;
+      margin-bottom: 10px;
+      color: #005f99;
+    }
+    .stat-box p {
+      font-weight: bold;
+      color: black;
+    }
+
+    /* IDENTITAS SEKOLAH (lengkap) */
+    .identitas-sekolah {
+      padding: 60px 20px;
+      background: #f9f9f9;
+      text-align: left;
+      max-width: 900px;
+      margin: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .identitas-sekolah h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: orange;
+    }
+    .identitas-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .identitas-grid p {
+      padding: 10px;
+      background: white;
+      border-left: 5px solid orange;
+      border-radius: 6px;
+    }
+    .identitas-grid strong {
+      color: #333;
+    }
+    @media(min-width: 768px) {
+      .identitas-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* SECTION */
+    section { padding: 80px 20px; text-align: center; }
+    section h2 { margin-bottom: 20px; color: orange; }
+    
+    .visi-misi p { margin-bottom: 20px; }
+    .identitas ul { list-style: none; }
+    .identitas li { margin: 5px 0; }
+    
+    /* Animasi scroll */
+    .hidden { opacity: 0; transform: translateY(40px); transition: all 1s ease; }
+    .show { opacity: 1; transform: translateY(0); }
+
+    /* FOOTER */
+    footer {
+      background: #111; color: white; text-align: center; padding: 30px 20px;
+    }
+    footer h3 { margin-bottom: 10px; }
+    .map iframe { width: 100%; height: 250px; border: 0; }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">
+      <img src="https://iili.io/KlM4A6g.md.png" alt="Logo">
+    </div>
+    <nav>
+      <div class="menu-toggle" id="menu-toggle">
+        <span></span><span></span><span></span>
+      </div>
+      <ul id="menu">
+        <li><a href="#beranda">Beranda</a></li>
+        <li><a href="#profil">Profil</a></li>
+        <li><a href="#berita">Berita</a></li>
+        <li><a href="#kontak">Kontak</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section id="beranda" class="hero">
+    <div class="hero-content">
+      <div class="line"></div>
+      <div class="text">
+        <h2>SELAMAT DATANG di</h2>
+        <h1>SMK Negeri 7 Batam</h1>
+        <p>SMK Negeri 7 Batam Mewujudkan Peserta Didik yang Beriman, Bertaqwa kepada
+          TUHAN YANG MAHA ESA dan Berakhlak Mulia, Terampil, Unggul, dan Berdaya Saing
+          Global di Era Teknologi Digital.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATISTIK -->
+  <section class="statistik hidden">
+    <div class="stat-box">
+      <h1 class="counter" data-target="0">0</h1>
+      <p>Guru dan Tenaga Kependidikan</p>
+    </div>
+    <div class="stat-box">
+      <h1 class="counter" data-target="0">0</h1>
+      <p>Rombel</p>
+    </div>
+    <div class="stat-box">
+      <h1 class="counter" data-target="0">0</h1>
+      <p>Konsentrasi Keahlian</p>
+    </div>
+    <div class="stat-box">
+      <h1 class="counter" data-target="0">0</h1>
+      <p>Peserta Didik</p>
+    </div>
+  </section>
+
+  <!-- IDENTITAS SEKOLAH -->
+  <section class="identitas-sekolah hidden">
+    <h2>Identitas Sekolah</h2>
+    <div class="identitas-grid">
+      <p><strong>Akreditasi :</strong> A</p>
+      <p><strong>Kurikulum :</strong> Kurikulum Merdeka</p>
+      <p><strong>NPSN :</strong> 69774885</p>
+      <p><strong>Status :</strong> Negeri</p>
+      <p><strong>Bentuk Pendidikan :</strong> SMK</p>
+      <p><strong>Status Kepemilikan :</strong> Pemerintah Daerah</p>
+      <p><strong>SK Pendirian Sekolah :</strong> KPTS.367/HK/IX/2014</p>
+      <p><strong>Tanggal SK Pendirian :</strong> 2014-09-05</p>
+      <p><strong>SK Izin Operasional :</strong> KPTS.367/HK/IX/2014</p>
+      <p><strong>Tanggal SK Izin Operasional :</strong> 2015-10-23</p>
+    </div>
+  </section>
+
+  <!-- VISI MISI -->
+  <section id="profil" class="visi-misi hidden">
+    <h2>Visi & Misi</h2>
+    <p>Visi: Menjadi sekolah unggul dalam teknologi digital dan karakter.</p>
+    <p>Misi: Mendidik siswa dengan keimanan, keterampilan, dan budaya.</p>
+  </section>
+
+  <!-- IDENTITAS SINGKAT -->
+  <section class="identitas hidden">
+    <h2>Identitas Singkat</h2>
+    <ul>
+      <li>Akreditasi: A</li>
+      <li>Kurikulum: Merdeka</li>
+      <li>Status: Negeri</li>
+      <li>Bentuk Pendidikan: SMK</li>
+      <li>Tanggal Berdiri: 2014-09-05</li>
+    </ul>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="kontak" class="hidden">
+    <h3>Kontak Kami</h3>
+    <p>Email: smknegeri7batam@gmail.com</p>
+    <p>Alamat: Perumahan Sekawan Pemko,
+Kelurahan, Belian, Kec. Batam Kota,
+Kota Batam, Prov. Kepulauan Riau</p>
+    <div class="map">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.871586160366!2d104.040889!3d1.118848!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMcKwMDcnMDguMiJOIDEwNMKwMDInMjcuMiJF!5e0!3m2!1sid!2sid!4v0000000000000"
+        allowfullscreen="" loading="lazy"></iframe>
+    </div>
+    <p>&copy; 2024 SMK Negeri 7 Batam - M. Fakhri Al K</p>
+  </footer>
+
+  <!-- SCRIPT -->
+  <script>
+    // Toggle menu mobile
+    const toggle = document.getElementById('menu-toggle');
+    const menu = document.getElementById('menu');
+    toggle.addEventListener('click', () => {
+      menu.classList.toggle('active');
+    });
+
+    // Animasi scroll
+    const hiddenElements = document.querySelectorAll('.hidden');
+    const observerScroll = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, { threshold: 0.2 });
+    hiddenElements.forEach(el => observerScroll.observe(el));
+
+    // Counter animasi angka
+    const counters = document.querySelectorAll('.counter');
+    counters.forEach(counter => {
+      const updateCount = () => {
+        const target = +counter.getAttribute('data-target');
+        const count = +counter.innerText;
+        const speed = 100; // semakin kecil semakin cepat
+
+        if (count < target) {
+          counter.innerText = Math.ceil(count + target / speed);
+          setTimeout(updateCount, 30);
+        } else {
+          counter.innerText = target;
+        }
+      };
+
+      const observerCounter = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            updateCount();
+            observerCounter.unobserve(counter);
+          }
+        });
+      }, { threshold: 0.5 });
+
+      observerCounter.observe(counter);
+    });
+  </script>
+</body>
+</html>
